@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include "Force.hpp"
 #include "computeNetForce.hpp"
 
 //The integrator updates every object based on its net force at every step.
@@ -13,6 +12,7 @@ class Integrator {
 	virtual void step(std::vector<Body> &bodies, std::vector<Vector2> &netForces, double dt) = 0;
 };
 
+//Most basic Integrator implementation. At every step, update position and velocity based on dt.
 class Euler : public Integrator {
 
 	public:

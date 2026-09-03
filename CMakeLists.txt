@@ -13,5 +13,5 @@ target_sources(sim_core
         INTERFACE
         FILE_SET HEADERS
         BASE_DIRS .
-        FILES Vector2.hpp Body.hpp Force.hpp Integrator.hpp computeNetForce.hpp
+        FILES math_tools/Vector2.hpp core/Body.hpp core/Force.hpp Integrators/Integrator.hpp computeNetForce.hpp
 )

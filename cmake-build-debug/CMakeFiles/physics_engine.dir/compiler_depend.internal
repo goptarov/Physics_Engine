@@ -3,11 +3,11 @@
 
 CMakeFiles/physics_engine.dir/Main.cpp.o
  /home/goptarov/physics_engine/Main.cpp
- /home/goptarov/physics_engine/Body.hpp
- /home/goptarov/physics_engine/Force.hpp
- /home/goptarov/physics_engine/Integrator.hpp
- /home/goptarov/physics_engine/Vector2.hpp
+ /home/goptarov/physics_engine/Integrators/Integrator.hpp
  /home/goptarov/physics_engine/computeNetForce.hpp
+ /home/goptarov/physics_engine/core/Body.hpp
+ /home/goptarov/physics_engine/core/Force.hpp
+ /home/goptarov/physics_engine/math_tools/Vector2.hpp
  /usr/include/alloca.h
  /usr/include/asm-generic/errno-base.h
  /usr/include/asm-generic/errno.h

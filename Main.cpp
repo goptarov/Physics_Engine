@@ -1,8 +1,6 @@
-
-#include "Force.hpp"
-#include "Body.hpp"
-#include "Integrator.hpp"
-#include "computeNetForce.hpp"
+#include "core/Force.hpp"
+#include "core/Body.hpp"
+#include "Integrators/Integrator.hpp"
 #include <iostream>
 
 
@@ -28,8 +26,8 @@ int main() {
 
 	//We must keep every step evaluate based on the same constant time(dt) in order to avoid errors due to CPU scheduling that
 	//would appear in a while(runTime < simulationTime) approach. The update happens in the Integrator's step() method
-	double dt = 0.00001;
-	int numSteps = 10000;
+	double dt = 0.0001;
+	int numSteps = 1000;
 
 	for (int step = 0; step < numSteps; step ++) {
 		std::cout << "Object1: Position: " << bodies[0].getPosition().toString() << "Velocity: " << bodies[0].getVelocity().toString() << std::endl;
