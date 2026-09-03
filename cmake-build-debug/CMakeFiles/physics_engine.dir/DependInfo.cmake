@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/goptarov/physics_engine/Main.cpp" "CMakeFiles/physics_engine.dir/Main.cpp.o" "gcc" "CMakeFiles/physics_engine.dir/Main.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

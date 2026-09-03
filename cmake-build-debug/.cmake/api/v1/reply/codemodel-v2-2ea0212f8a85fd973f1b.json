@@ -12,7 +12,11 @@
 						"string" : "3.0"
 					},
 					"projectIndex" : 0,
-					"source" : "."
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
 				}
 			],
 			"name" : "Debug",
@@ -23,10 +27,23 @@
 					[
 						0
 					],
-					"name" : "physics_engine"
+					"name" : "physics_engine",
+					"targetIndexes" : 
+					[
+						0
+					]
 				}
 			],
-			"targets" : []
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "physics_engine::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-physics_engine-Debug-053371d3dbc5e560c670.json",
+					"name" : "physics_engine",
+					"projectIndex" : 0
+				}
+			]
 		}
 	],
 	"kind" : "codemodel",

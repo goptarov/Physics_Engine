@@ -1,1 +1,1 @@
-/usr/bin/c++ -g -rdynamic CMakeFiles/physics_engine.dir/main.cpp.o CMakeFiles/physics_engine.dir/Vector2.cpp.o -o physics_engine 
+/usr/bin/c++ -g -rdynamic CMakeFiles/physics_engine.dir/Main.cpp.o -o physics_engine 
