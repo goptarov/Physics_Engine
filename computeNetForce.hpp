@@ -7,8 +7,8 @@
 #include "Body.hpp"
 #include "Force.hpp"
 
-//Since Force is an abstract class we need to sent a vector of unique pointers to Force (otherwise each force will be an empty Force instead of Gravity for example.
-std::vector<Vector2> computeNetForces(const std::vector<Body> &bodies, const std::vector<Force*> forces) {
+//Since Force is an abstract class we need to send a vector of unique pointers to Force (otherwise each force will be an empty Force instead of Gravity for example).
+std::vector<Vector2> computeNetForces(const std::vector<Body> &bodies, const std::vector<std::unique_ptr<Force>> &forces) {
 
 	std::vector<Vector2> netForces(bodies.size());
 

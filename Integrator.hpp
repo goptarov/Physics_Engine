@@ -18,7 +18,9 @@ class Euler : public Integrator {
 	public:
 
 	void step(std::vector<Body> &bodies, std::vector<Vector2> &netForces, double dt) override {
+
 		for (int i = 0; i < bodies.size(); i++) {
+			std::cout << "NetForce " << i << netForces[i].toString() <<std::endl;
 			Vector2 acceleration = netForces[i] / bodies[i].getMass();
 
 			bodies[i].setVelocity(bodies[i].getVelocity() + acceleration * dt);
