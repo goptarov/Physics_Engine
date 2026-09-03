@@ -92,6 +92,9 @@ physics_engine_EXTERNAL_OBJECTS =
 
 physics_engine: CMakeFiles/physics_engine.dir/Main.cpp.o
 physics_engine: CMakeFiles/physics_engine.dir/build.make
+physics_engine: /usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.6.1
+physics_engine: /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.6.1
+physics_engine: /usr/lib/x86_64-linux-gnu/libsfml-system.so.2.6.1
 physics_engine: CMakeFiles/physics_engine.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/goptarov/physics_engine/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable physics_engine"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/physics_engine.dir/link.txt --verbose=$(VERBOSE)

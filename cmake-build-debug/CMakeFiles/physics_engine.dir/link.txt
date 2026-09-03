@@ -1,1 +1,1 @@
-/usr/bin/c++ -g -rdynamic CMakeFiles/physics_engine.dir/Main.cpp.o -o physics_engine 
+/usr/bin/c++ -g CMakeFiles/physics_engine.dir/Main.cpp.o -o physics_engine  /usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.6.1 /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.6.1 /usr/lib/x86_64-linux-gnu/libsfml-system.so.2.6.1 

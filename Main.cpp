@@ -1,12 +1,16 @@
 #include "core/Force.hpp"
 #include "core/Body.hpp"
 #include "Integrators/Integrator.hpp"
+#include "SFML/Graphics.hpp"
 #include <iostream>
 
 
-int main() {
-
+int main(int argc, char *argv[]) {
 	static Euler integrator;
+	sf::RenderWindow window(sf::VideoMode({800, 600}), "Physics engine");; //RenderWindow is a special window for rendering (derived from the Window class)
+
+	sf::CircleShape shape1(100.f);
+	shape1.setFillColor(sf::Color::Green);
 
 	Vector2 obj1Pos = Vector2(0, 0);
 	Vector2 obj1Vel = Vector2(0, 0);
@@ -35,8 +39,14 @@ int main() {
 
 		//Firstly compute every object's net force
 		std::vector<Vector2> netForces = computeNetForces(bodies, forces);
-
 		//Then execute the step
 		integrator.step(bodies, netForces, dt);
+
+
+		window.clear(sf::Color::Black);
+
+		shape1.setPosition({static_cast<float>(bodies[0].getPosition().x), static_cast<float>(bodies[0].getPosition().y)});
+
+		window.display();
 	}
 }
