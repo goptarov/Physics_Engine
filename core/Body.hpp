@@ -17,6 +17,9 @@ class Body {
 	void setMass(double mass) {
 		this->mass = mass;
 	}
+	void setRadius(double radius) {
+		this->radius = radius;
+	}
 	void setPosition(Vector2 position) {
 		this->position = position;
 	}
@@ -27,6 +30,9 @@ class Body {
 
 	double getMass() const {
 		return mass;
+	}
+	double getRadius() const {
+		return radius;
 	}
 	Vector2 getPosition() const {
 		return position;

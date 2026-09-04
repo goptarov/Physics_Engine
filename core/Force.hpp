@@ -15,6 +15,7 @@ class Force {
 class Gravity : public Force {
 
 	double G = 6.674e-11; //m^3 * kg^-1 * s^-2
+	//double G = 1; //AU
     //TODO: softening is standard practice in N-body simulators
 
 	public:
