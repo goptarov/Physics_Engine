@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
+#include <utility>
 #include "math_tools/Vector2.hpp"
 
 class Body {
@@ -9,10 +11,15 @@ class Body {
 	Vector2 position;
 	Vector2 velocity;
 
+	//worth noting that shape has its own coordinates that live inside the window
+	//making these two positions automatically sync would be a good design choice
+	sf::CircleShape shape;
+
 	public:
 
 	Body() = default;
-	Body(double _mass, double _radius, Vector2 _position, Vector2 _velocity) : mass(_mass), radius(_radius), position(_position), velocity(_velocity) {}
+	Body(double _mass, double _radius, Vector2 _position, Vector2 _velocity, sf::CircleShape _shape) :
+	mass(_mass), radius(_radius), position(_position), velocity(_velocity), shape(_shape) {}
 
 	void setMass(double mass) {
 		this->mass = mass;
@@ -25,6 +32,9 @@ class Body {
 	}
 	void setVelocity(Vector2 velocity) {
 		this->velocity = velocity;
+	}
+	void setShape(sf::CircleShape shape) {
+		this->shape = shape;
 	}
 
 
@@ -39,5 +49,8 @@ class Body {
 	}
 	Vector2 getVelocity() const {
 		return velocity;
+	}
+	sf::CircleShape& getShape() {
+		return shape;
 	}
 };

@@ -4,9 +4,11 @@
 #include "SFML/Graphics.hpp"
 #include <iostream>
 
-#define SCALE_FACTOR 2e-9
-#define centerX 600.f
-#define centerY 400.f
+#define SCALE_FACTOR 1
+#define CENTERX 600.f
+#define CENTERY 400.f
+#define PARTICLE_MASS 1000000
+#define PARTICLE_SIZE 5
 
 int main(int argc, char *argv[]) {
 
@@ -16,41 +18,19 @@ int main(int argc, char *argv[]) {
 	sf::RenderWindow window(sf::VideoMode({1200, 800}), "Physics engine");;
 	window.setFramerateLimit(140);
 
-	Vector2 obj1Pos = Vector2(0, 0);
-	Vector2 obj1Vel = Vector2(0, 0);
-	Vector2 obj2Pos = Vector2(1.495978707e11, 0);
-	Vector2 obj2Vel = Vector2(0, 29.78e3);
-	//Vector2 obj2Vel = Vector2(0, 0);
-
-	Body *obj1 = new Body(1.988416e30, 6.957e8, obj1Pos, obj1Vel);
-	Body *obj2 = new Body(5.9722e24, 6.371e6, obj2Pos, obj2Vel);
-
 	//note that objn will not change when bodies[] changes
 	std::vector<Body> bodies;
-	bodies.push_back(*obj1);
-	bodies.push_back(*obj2);
 
+	//forces are held in a vector in order to simplify adding new functions in the future
 	std::vector<std::unique_ptr<Force>> forces;
 	forces.push_back(std::make_unique<Gravity>());
 
-
-
-	sf::CircleShape sun(bodies[0].getRadius() / 2e7);
-	sf::CircleShape earth(bodies[1].getRadius() / 1e6);
-
-	sun.setOrigin(bodies[0].getRadius() / 2e7, bodies[0].getRadius() / 2e7);
-	earth.setOrigin(bodies[1].getRadius() / 1e6, bodies[1].getRadius() / 1e6);
-
-	sun.setFillColor(sf::Color::Yellow);
-	earth.setFillColor(sf::Color::Blue);
-
-
 	//We must keep every step evaluate based on the same constant time(dt) in order to avoid errors due to CPU scheduling that
 	//would appear in a while(runTime < simulationTime) approach. The update happens in the Integrator's step() method
-	double dt = 3600.0;
-	int numSteps = 8760;
+	double dt = 100;
+	int numSteps = 100000;
 
-	sleep(1);
+	double particleCount = 0;
 
 	for (int step = 0; step < numSteps && window.isOpen(); ++step) {
 
@@ -58,29 +38,38 @@ int main(int argc, char *argv[]) {
 
 		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) window.close();
-		}
 
-		std::cout << "Object1: Position: " << bodies[0].getPosition().toString() << "Velocity: " << bodies[0].getVelocity().toString() << std::endl;
-		std::cout << "Object2: Position: " << bodies[1].getPosition().toString() << "Velocity: " << bodies[1].getVelocity().toString() << std::endl;
+			if (event.type == sf::Event::MouseButtonPressed) {
+
+				Vector2 newBodyPos = Vector2((sf::Mouse::getPosition(window).x - CENTERX) / SCALE_FACTOR , (sf::Mouse::getPosition(window).y - CENTERY) / SCALE_FACTOR);
+				Vector2 newBodyVel = Vector2(0, 0); // Initially give no v0 to the created objects
+
+				sf::CircleShape *particle = new sf::CircleShape(PARTICLE_SIZE / SCALE_FACTOR);
+
+				particle->setOrigin(PARTICLE_SIZE, PARTICLE_SIZE); // sets the origin at the center of the particle instead of the top-left corner
+				particle->setFillColor(sf::Color::Magenta);
+
+				Body *newBody = new Body(PARTICLE_MASS, PARTICLE_SIZE, newBodyPos, newBodyVel, *particle);
+				bodies.push_back(*newBody);
+
+				particleCount++;
+				std::cout << particleCount << " particles" << std::endl;
+			}
+		}
 
 		//Firstly compute every object's net force
 		std::vector<Vector2> netForces = computeNetForces(bodies, forces);
 		//Then execute the step
 		integrator.step(bodies, netForces, dt);
 
-
 		window.clear(sf::Color::Black);
 
-		sun.setPosition({
-			centerX + static_cast<float>(bodies[0].getPosition().x * SCALE_FACTOR),
-			centerY + static_cast<float>(bodies[0].getPosition().y * SCALE_FACTOR)});
-		earth.setPosition({
-			centerX + static_cast<float>(bodies[1].getPosition().x * SCALE_FACTOR),
-			centerY + static_cast<float>(bodies[1].getPosition().y * SCALE_FACTOR)});
-
-
-		window.draw(sun);
-		window.draw(earth);
+		for (size_t i = 0; i < bodies.size(); ++i) {
+			bodies[i].getShape().setPosition({
+				CENTERX + static_cast<float>(bodies[i].getPosition().x * SCALE_FACTOR),
+				CENTERY + static_cast<float>(bodies[i].getPosition().y * SCALE_FACTOR)});
+			window.draw(bodies[i].getShape());
+		}
 
 		window.display();
 	}
